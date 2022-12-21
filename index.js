@@ -6,7 +6,6 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import path from 'path';
 import { fileURLToPath } from 'url';
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
@@ -17,6 +16,7 @@ import {verifyToken} from "./middleware/auth.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
 import { users, posts} from "./data/index.js";
+import * as path from 'path';//for hosting on cyclic
 
 /* CONFIGURATIONS */
 const PORT = process.env.PORT || 3000;  //If 3001 doesn't work, then it will make use of 3000
@@ -24,7 +24,6 @@ const __filename  = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
-const path = require('path');//for hosting on cyclic
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy: 'cross-origin'}));
