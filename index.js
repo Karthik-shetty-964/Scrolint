@@ -21,13 +21,6 @@ import * as path from 'path';//for hosting on cyclic
 const app = express();
 app.use(express.json());
 
-//static files => to hosting on CYCLIC 
-app.use(express.static(path.join(__dirname,'./client/build')));
-
-app.get('*', function(req,res){
-    res.sendFile(path.join(__dirname,'./client/build/index.html'));
-});
-
 /* CONFIGURATIONS */
 const PORT = process.env.PORT || 3000;  //If 3001 doesn't work, then it will make use of 3000
 const __filename  = fileURLToPath(import.meta.url);
@@ -39,6 +32,16 @@ app.use(morgan("common"));
 app.use(bodyParser.json({limit : "30mb" , extended : true}));
 app.use(bodyParser.urlencoded({limit : "30mb" , extended : true}));
 app.use(cors());
+
+
+
+//static files => to hosting on CYCLIC 
+app.use(express.static(path.join(__dirname,'./client/build')));
+
+app.get('*', function(req,res){
+    res.sendFile(path.join(__dirname,'./client/build/index.html'));
+});
+
 app.use("/assets",express.static(path.join(__dirname,'public/assets')));
 
 //FILE STORAGE
