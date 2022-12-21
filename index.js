@@ -18,6 +18,13 @@ import Post from "./models/Post.js";
 import { users, posts} from "./data/index.js";
 import * as path from 'path';//for hosting on cyclic
 
+//static files => to hosting on CYCLIC 
+app.use(express.static(path.join(__dirname,'./client/build')));
+
+app.get('*', function(req,res){
+    res.sendFile(path.join(__dirname,'./client/build/index.html'));
+});
+
 /* CONFIGURATIONS */
 const PORT = process.env.PORT || 3000;  //If 3001 doesn't work, then it will make use of 3000
 const __filename  = fileURLToPath(import.meta.url);
@@ -57,12 +64,6 @@ app.use("/auth",authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
-//static files => to hosting on CYCLIC 
-app.use(express.static(path.join(__dirname,'./client/build')));
-
-app.get('*', function(req,res){
-    res.sendFile(path.join(__dirname,'./client/build/index.html'));
-});
 
 
 /*MONGOOSE SETUP */
