@@ -69,7 +69,7 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
 
-mongoose.set('strictQuery',false);
+mongoose.set('strictQuery', true);
 /*MONGOOSE SETUP */
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser : true,
